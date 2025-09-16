@@ -21,9 +21,9 @@ const handleSubmit = async (e) => {
       password,
     });
 
-    const { token, username } = res.data;
-
-    login(token, username);  // Guarda token y nombre en contexto + localStorage
+    const { token, username, userId, rolId } = res.data;
+    
+    login(token, username, userId, rolId);  // Guarda token y nombre en contexto + localStorage
     navigate('/');           // Redirige al dashboard
   } catch (err) {
     setError(err.response?.data?.message || 'Error al iniciar sesión');
