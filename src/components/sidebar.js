@@ -1,39 +1,60 @@
-import styles from './sidebar.module.css';
-import { FaHome, FaSearch, FaFileAlt, FaCalendarAlt, FaCog, FaUser } from 'react-icons/fa';
+import { Link } from "react-router-dom";
+import styles from "./sidebar.module.css";
+import {
+  FaHome,
+  FaSearch,
+  FaFileAlt,
+  FaCalendarAlt,
+  FaCog,
+  FaUser,
+  FaBusinessTime,
+  FaBuilding,
+} from "react-icons/fa";
 
 const Sidebar = ({ isOpen, toggle }) => {
   return (
     <>
       <button className={styles.toggleButton} onClick={toggle}>
-        {isOpen ? '✖' : '☰'}
+        {isOpen ? "✖" : "☰"}
       </button>
 
-      <aside className={`${styles.sidebar} ${isOpen ? styles.open : styles.closed}`}>
+      <aside
+        className={`${styles.sidebar} ${isOpen ? styles.open : styles.closed}`}
+      >
         <nav>
           <ul>
             <li>
-              <FaHome className={styles.icon}/>
-              {isOpen && <span>Inicio</span>}
+              <Link to="/">
+                <FaHome className={styles.icon} />
+                {isOpen && <span>Inicio</span>}
+              </Link>
             </li>
             <li>
-              <FaSearch className={styles.icon}/>
+                <Link to="/">
+              <FaUser className={styles.icon} />
+              {isOpen && <span>Perfiles</span>}
+              </Link>
+            </li>
+            <li>
+              <Link to="/companies">
+              <FaBuilding className={styles.icon} />
+              {isOpen && <span>Empresas</span>}</Link>
+            </li>
+            <li>
+              <FaSearch className={styles.icon} />
               {isOpen && <span>Buscar</span>}
             </li>
             <li>
-              <FaFileAlt className={styles.icon}/>
+              <FaFileAlt className={styles.icon} />
               {isOpen && <span>Documentos</span>}
             </li>
             <li>
-              <FaCalendarAlt className={styles.icon}/>
+              <FaCalendarAlt className={styles.icon} />
               {isOpen && <span>Calendario</span>}
             </li>
             <li>
-              <FaCog className={styles.icon}/>
+              <FaCog className={styles.icon} />
               {isOpen && <span>Configuración</span>}
-            </li>
-            <li>
-              <FaUser className={styles.icon}/>
-              {isOpen && <span>Perfil</span>}
             </li>
           </ul>
         </nav>

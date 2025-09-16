@@ -1,8 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  //baseURL: 'https://requestapp-back.d8ieii.easypanel.host/',
-  baseURL: 'http://localhost:3001/', 
+  baseURL: 'http://localhost:3001/', // reemplaza con tu URL real
   headers: {
     'Content-Type': 'application/json',
   },
