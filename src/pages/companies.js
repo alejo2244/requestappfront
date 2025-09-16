@@ -42,7 +42,7 @@ function DashboardView() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const { user } = useContext(UserContext);
-  const [companies, setCompanies] = useState([]);
+  const [ setCompanies] = useState([]);
 
   useEffect(() => {
     const fetchCompanies = async () => {
@@ -61,7 +61,7 @@ function DashboardView() {
     if (user?.token) {
       fetchCompanies();
     }
-  }, [user]);
+  }, [user, setCompanies]);
 
   return (
     <div className={styles.dashboardContainer}>

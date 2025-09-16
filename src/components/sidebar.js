@@ -7,7 +7,6 @@ import {
   FaCalendarAlt,
   FaCog,
   FaUser,
-  FaBusinessTime,
   FaBuilding,
 } from "react-icons/fa";
 

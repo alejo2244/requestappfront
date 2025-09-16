@@ -13,8 +13,8 @@ const AdvanceRequestList = () => {
 console.log(user);
 
   useEffect(() => {
-    if (user?.id) {
-     axios.get(`/api/advanceRequest/${user.id}`, {
+    if (user?.userId) {
+     axios.get(`/api/advanceRequest/${user.userId}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -22,7 +22,7 @@ console.log(user);
       .then(res => setSolicitudes(res.data))
       .catch(err => console.error(err));
     }
-  }, [token, user?.id]);
+  }, [token, user?.userId]);
 
   const descargarPDF = async (id) => {
     try {
@@ -90,7 +90,7 @@ console.log(user);
                     : 'Finalizada'}
               </td>
               <td>
-                {s.statusId === 1 && (user.rolId === "1" || user.rolId === "3") && (
+                {s.statusId === 1 && (user.rolId === 1 || user.rolId === 3) && (
                   <button onClick={() => aprobarSolicitud(s.id)}>
                     Aprobar
                   </button>

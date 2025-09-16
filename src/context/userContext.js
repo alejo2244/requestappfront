@@ -10,7 +10,7 @@ export const UserProvider = ({ children }) => {
     const storedRolId = localStorage.getItem('rolId');
     const storedUsername = localStorage.getItem('username');
     if (storedToken && storedUsername && storedUserId && storedRolId) {
-      setUser({ token: storedToken, username: storedUsername, id: storedUserId, rolId: storedRolId });
+      setUser({ token: storedToken, username: storedUsername, userId: Number(storedUserId), rolId: Number(storedRolId) });
     }
     else {
       setUser(null); // asegura que el estado esté limpio si falta algo
@@ -31,7 +31,7 @@ export const UserProvider = ({ children }) => {
     localStorage.setItem('rolId', rolId);
     localStorage.setItem('userId', userId);
 
-    setUser({ token, username });
+    setUser({ token, username, userId, rolId });
   };
 
   return (

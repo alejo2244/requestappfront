@@ -3,7 +3,6 @@ import axios from "../api/axios";
 import { useContext } from "react";
 import { UserContext } from "../context/userContext";
 import styles from "./companiesRequest.module.css";
-import fileDownload from "js-file-download";
 import logoImagen from "../assets/images/logo.png";
 
 const CompaniesRequestList = () => {
