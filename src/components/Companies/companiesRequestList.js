@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import axios from "../api/axios";
+import axios from "../../api/axios";
 import { useContext } from "react";
-import { UserContext } from "../context/userContext";
+import { UserContext } from "../../context/userContext";
 import styles from "./companiesRequest.module.css";
-import logoImagen from "../assets/images/logo.png";
+import logoImagen from "../../assets/images/logo.png";
 
 const CompaniesRequestList = () => {
   const { user } = useContext(UserContext);
@@ -19,6 +19,7 @@ const CompaniesRequestList = () => {
     email: "",
     address: "",
     logoUrl: "",
+    phone: "",
     sendConfirmation: false,
   });
 
@@ -56,6 +57,7 @@ const CompaniesRequestList = () => {
         email: "",
         address: "",
         logoUrl: "",
+        phone: "",
         sendConfirmation: false,
       });
     } catch (error) {
@@ -96,7 +98,7 @@ const CompaniesRequestList = () => {
       <div className={styles.headerRow}>
         <h2>Empresas</h2>
         <button
-          className={styles.buttonGeneral}
+          className={styles.buttonPrimary}
           onClick={() => setIsAdding(true)}
         >
           Agregar
@@ -123,7 +125,7 @@ const CompaniesRequestList = () => {
               <td>{s.address}</td>
               <td>
                 <button
-                  className={styles.buttonGeneral}
+                  className={styles.buttonSecondary}
                   onClick={() => openPopup(s)}
                 >
                   Detalle
@@ -131,7 +133,7 @@ const CompaniesRequestList = () => {
               </td>
               <td>
                 <button
-                  className={styles.buttonDelete}
+                  className={styles.buttonPrimary}
                   onClick={() => deleteCompany(s.id)}
                 >
                   Eliminar
@@ -218,6 +220,18 @@ const CompaniesRequestList = () => {
                   />
                 </label>
 
+                <label>
+                  Telefono
+                  <input
+                    type="number"
+                    placeholder="0000000000"
+                    value={newCompany.phone}
+                    onChange={(e) =>
+                      setNewCompany({ ...newCompany, phone: e.target.value })
+                    }
+                  />
+                </label>
+
                 <label className={styles.checkbox}>
                   <input
                     type="checkbox"
@@ -249,14 +263,14 @@ const CompaniesRequestList = () => {
             </div>
 
             <div className={styles.modalActions}>
-              <button onClick={createCompany} className={styles.buttonGeneral}>
-                Crear
-              </button>
               <button
                 onClick={() => setIsAdding(false)}
-                className={styles.buttonDelete}
+                className={styles.buttonSecondary}
               >
                 Cancelar
+              </button>
+              <button onClick={createCompany} className={styles.buttonPrimary}>
+                Crear
               </button>
             </div>
           </div>
@@ -284,11 +298,31 @@ const CompaniesRequestList = () => {
                 />
                 <input
                   type="text"
+                  value={selectedCompany.location}
+                  onChange={(e) =>
+                    setSelectedCompany({
+                      ...selectedCompany,
+                      location: e.target.value,
+                    })
+                  }
+                />
+                <input
+                  type="text"
                   value={selectedCompany.email}
                   onChange={(e) =>
                     setSelectedCompany({
                       ...selectedCompany,
                       email: e.target.value,
+                    })
+                  }
+                />
+                <input
+                  type="text"
+                  value={selectedCompany.phone}
+                  onChange={(e) =>
+                    setSelectedCompany({
+                      ...selectedCompany,
+                      phone: e.target.value,
                     })
                   }
                 />
@@ -303,12 +337,6 @@ const CompaniesRequestList = () => {
                   }
                 />
                 {/* puedes agregar más campos */}
-                <button
-                  onClick={updateCompany}
-                  className={styles.buttonGeneral}
-                >
-                  Guardar
-                </button>
               </>
             ) : (
               <ul>
@@ -325,6 +353,9 @@ const CompaniesRequestList = () => {
                   <b>Email:</b> {selectedCompany.email}
                 </li>
                 <li>
+                  <b>Telefono:</b> {selectedCompany.phone}
+                </li>
+                <li>
                   <b>Ubicación:</b> {selectedCompany.location}
                 </li>
                 <li>
@@ -338,17 +369,25 @@ const CompaniesRequestList = () => {
             )}
 
             <div className={styles.modalActions}>
+              <button onClick={closePopup} className={styles.buttonSecondary}>
+                Cerrar
+              </button>
               {!isEditing && (
                 <button
                   onClick={() => setIsEditing(true)}
-                  className={styles.buttonGeneral}
+                  className={styles.buttonPrimary}
                 >
                   Modificar
                 </button>
               )}
-              <button onClick={closePopup} className={styles.buttonDelete}>
-                Cerrar
-              </button>
+              {isEditing && (
+                <button
+                  onClick={updateCompany}
+                  className={styles.buttonGeneral}
+                >
+                  Guardar
+                </button>
+              )}
             </div>
           </div>
         </div>

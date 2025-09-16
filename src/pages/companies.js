@@ -1,11 +1,10 @@
-import { useEffect, useState, useContext } from "react";
-import axios from "../api/axios";
+import { useState, useContext } from "react";
 import { UserContext } from "../context/userContext";
 import styles from "./home.module.css";
-import Sidebar from "../components/sidebar";
-import Header from "../components/header";
+import Sidebar from "../components/Sidebar/sidebar";
+import Header from "../components/Header/header";
 import { Link } from "react-router-dom";
-import CompaniesRequestList from "../components/companiesRequestList";
+import CompaniesRequestList from "../components/Companies/companiesRequestList";
 
 export default function Companies() {
   const { user } = useContext(UserContext);
@@ -40,28 +39,6 @@ function PublicHomeView() {
 
 function DashboardView() {
   const [menuOpen, setMenuOpen] = useState(false);
-
-  const { user } = useContext(UserContext);
-  const [ setCompanies] = useState([]);
-
-  useEffect(() => {
-    const fetchCompanies = async () => {
-      try {
-        const res = await axios.get("/api/companies", {
-          headers: {
-            Authorization: `Bearer ${user?.token}`, // si tu backend valida token
-          },
-        });
-        setCompanies(res.data);
-      } catch (err) {
-        console.error("Error cargando empresas:", err);
-      }
-    };
-
-    if (user?.token) {
-      fetchCompanies();
-    }
-  }, [user, setCompanies]);
 
   return (
     <div className={styles.dashboardContainer}>

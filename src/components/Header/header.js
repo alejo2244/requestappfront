@@ -2,7 +2,7 @@
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './header.module.css';
-import { UserContext } from '../context/userContext';
+import { UserContext } from '../../context/userContext';
 
 const Header = () => {
   const { user, logout } = useContext(UserContext);

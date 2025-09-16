@@ -1,31 +1,35 @@
 import { useState, useContext } from 'react';
-import axios from '../api/axios';
-import { UserContext } from '../context/userContext';
-import styles from './registerForm.module.css';
+import { useNavigate } from 'react-router-dom';
+import axios from '../../../api/axios';
+import styles from './loginForm.module.css';
+import { UserContext } from '../../../context/userContext';
 
-export default function RegisterForm() {
+export default function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [nombre, setNombre] = useState('');
   const { login } = useContext(UserContext);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError(null);
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setError(null);
 
-    try {
-      const res = await axios.post('/register', {
-        email,
-        password,
-        nombre,
-      });
+  try {
+    const res = await axios.post('/login', {
+      email,
+      password,
+    });
 
-      login(res.data.token);
-    } catch (err) {
-      setError(err.response?.data?.message || 'Error al registrar');
-    }
-  };
+    const { token, username, userId, rolId } = res.data;
+    
+    login(token, username, userId, rolId);  // Guarda token y nombre en contexto + localStorage
+    navigate('/');           // Redirige al dashboard
+  } catch (err) {
+    setError(err.response?.data?.message || 'Error al iniciar sesión');
+  }
+};
+
 
   return (
     <div className={styles.container}>
@@ -38,16 +42,8 @@ export default function RegisterForm() {
 
       <div className={styles.formSection}>
         <div className={styles.card}>
-          <h2>Registro</h2>
+          <h2>Iniciar sesión</h2>
           <form onSubmit={handleSubmit}>
-            <input
-              type="text"
-              value={nombre}
-              onChange={(e) => setNombre(e.target.value)}
-              placeholder="Nombre completo"
-              className={styles.input}
-              required
-            />
             <input
               type="email"
               value={email}
@@ -65,11 +61,11 @@ export default function RegisterForm() {
               required
             />
             <button type="submit" className={styles.button}>
-              Registrarse
+              Ingresar
             </button>
           </form>
           <div className={styles.link}>
-            ¿Ya tienes una cuenta? <a href="/login">Iniciar sesión</a>
+            ¿No tienes cuenta? <a href="/register">Regístrate</a>
           </div>
           {error && <p style={{ color: 'red', marginTop: '12px' }}>{error}</p>}
         </div>
