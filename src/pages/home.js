@@ -5,6 +5,7 @@ import Header from '../components/header';
 import { UserContext } from '../context/userContext';
 import Sidebar from '../components/sidebar';
 import { useState } from 'react';
+import AdvanceRequestList from '../components/advanceRequestList';
 
 export default function Home() {
   const { user  } = useContext(UserContext);
@@ -62,52 +63,7 @@ function DashboardView() {
         </section>
 
         <section className={styles.table}>
-          <table>
-            <thead>
-              <tr>
-                <th>Nombre</th>
-                <th>Fecha</th>
-                <th>Empresa</th>
-                <th>Ubicación</th>
-                <th>Estado</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Jerry Matfield</td>
-                <td>19 May, 2021 10:00 AM</td>
-                <td>Company 1</td>
-                <td>New York</td>
-                <td>Finalizado</td>
-                <td><button>Detalles</button></td>
-              </tr>
-              <tr>
-                <td>Ellianos Vesilov</td>
-                <td>19 May, 2021 12:00 PM</td>
-                <td>Company 1</td>
-                <td>Ontario</td>
-                <td>Pendiente</td>
-                <td><button>Aprobar</button> <button>Detalles</button></td>
-              </tr>
-              <tr>
-                <td>Diana Lee</td>
-                <td>19 May, 2021 2:15 PM</td>
-                <td>Company 2</td>
-                <td>Chicago</td>
-                <td>Finalizado</td>
-                <td><button>Detalles</button></td>
-              </tr>
-              <tr>
-                <td>Lissa Shipsey</td>
-                <td>19 May, 2021 3:30 PM</td>
-                <td>Company 2</td>
-                <td>San Francisco</td>
-                <td>Pendiente</td>
-                <td><button>Detalles</button></td>
-              </tr>
-            </tbody>
-          </table>
+          <AdvanceRequestList />
         </section>
       </main>
     </div>
